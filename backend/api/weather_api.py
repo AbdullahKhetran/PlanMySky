@@ -63,10 +63,17 @@ except Exception as e:
     print(f"[WARNING] Community Router not available: {e}")
     print("  Community features will not be available.")
 
+allowedList = [
+    "https://plan-my-sky-5le9.vercel.app", 
+    "http://localhost:3000",
+    "http://127.0.0.1:3000",
+    "http://localhost:5173",
+    "http://127.0.0.1:5173"
+    ]
 # CORS middleware (allow frontend to connect)
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["*"],  # In production, specify your frontend URL
+    allow_origins=allowedList,
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
