@@ -1,4 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react';
+import { getLocations } from '../services/weatherApi';
 
 const SearchBar = ({ isPanelOpen, onLocationSelect }) => {
   const [searchTerm, setSearchTerm] = useState('');
@@ -12,8 +13,7 @@ const SearchBar = ({ isPanelOpen, onLocationSelect }) => {
   useEffect(() => {
     const fetchLocations = async () => {
       try {
-        const response = await fetch('http://localhost:8000/api/locations');
-        const data = await response.json();
+        const data = await getLocations();
         setLocations(data.locations || []);
       } catch (error) {
         console.error('Error fetching locations:', error);

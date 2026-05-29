@@ -141,7 +141,7 @@ Centralized API client for all community endpoints:
 - Motor (async MongoDB driver) installed
 
 ### Frontend Configuration
-- `VITE_API_URL` should point to backend (default: http://localhost:8000)
+- `VITE_API_BASE_URL` should point to backend (default: http://localhost:8000)
 - No authentication required (uses localStorage for user tracking)
 
 ## Future Enhancements

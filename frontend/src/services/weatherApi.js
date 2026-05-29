@@ -37,6 +37,20 @@ export const getMonthlyStats = async (month, location) => {
   return response.data;
 };
 
+// Submit survey vote
+export const submitSurveyVote = async (voteData) => {
+  const response = await api.post('/api/survey/vote', voteData);
+  return response.data;
+};
+
+// Get survey results
+export const getSurveyResults = async (location, date) => {
+  const response = await api.get('/api/survey/results', {
+    params: { location, date }
+  });
+  return response.data;
+};
+
 // Find nearest location to coordinates
 export const findNearestLocation = async (lat, lon) => {
   try {

@@ -1,6 +1,8 @@
 import { useState, useEffect, useContext } from 'react';
 import { AuthContext } from '../contexts/AuthContext';
 
+const API_BASE_URL = import.meta.env.VITE_API_BASE_URL || 'http://localhost:8000';
+
 const UserDashboard = () => {
   const { token } = useContext(AuthContext);
   const [userEmail, setUserEmail] = useState(null);
@@ -44,7 +46,7 @@ const UserDashboard = () => {
       const userId = payload.email; // Using email as user_id
 
       const response = await fetch(
-        `http://localhost:8000/api/calendar/auth/status?user_id=${userId}`
+        `${API_BASE_URL}/api/calendar/auth/status?user_id=${userId}`
       );
 
       const data = await response.json();
@@ -71,7 +73,7 @@ const UserDashboard = () => {
       const userId = payload.email;
 
       // Redirect to Google OAuth
-      window.location.href = `http://localhost:8000/api/calendar/auth/initiate?user_id=${userId}`;
+      window.location.href = `${API_BASE_URL}/api/calendar/auth/initiate?user_id=${encodeURIComponent(userId)}`;
     } catch (error) {
       console.error('Error connecting calendar:', error);
     }
@@ -87,7 +89,7 @@ const UserDashboard = () => {
       const userId = payload.email;
 
       const response = await fetch(
-        `http://localhost:8000/api/calendar/auth/revoke?user_id=${userId}`,
+        `${API_BASE_URL}/api/calendar/auth/revoke?user_id=${encodeURIComponent(userId)}`,
         {
           method: 'DELETE'
         }

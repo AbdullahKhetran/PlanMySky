@@ -1,6 +1,8 @@
 import { useState, useEffect } from 'react';
 import { PieChart, Pie, Cell, Tooltip, Legend, ResponsiveContainer } from 'recharts';
 
+const API_BASE_URL = import.meta.env.VITE_API_BASE_URL || 'http://localhost:8000';
+
 const WeatherSurvey = ({ weatherData, locationData }) => {
   const [surveyQuestion, setSurveyQuestion] = useState(null);
   const [surveyOptions, setSurveyOptions] = useState([]);
@@ -80,7 +82,7 @@ const WeatherSurvey = ({ weatherData, locationData }) => {
       const locationKey = `${locationData.nearest?.name}_${weatherData.date}`;
 
       // Submit vote to backend
-      const response = await fetch('http://localhost:8000/api/survey/vote', {
+      const response = await fetch(`${API_BASE_URL}/api/survey/vote`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -127,7 +129,7 @@ const WeatherSurvey = ({ weatherData, locationData }) => {
 
     try {
       const response = await fetch(
-        `http://localhost:8000/api/survey/results?location=${locationData.nearest?.name}&date=${weatherData.date}`
+        `${API_BASE_URL}/api/survey/results?location=${locationData.nearest?.name}&date=${weatherData.date}`
       );
 
       if (response.ok) {

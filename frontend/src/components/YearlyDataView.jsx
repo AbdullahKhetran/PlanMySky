@@ -4,6 +4,8 @@ import {
   XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer, ZAxis
 } from 'recharts';
 
+const API_BASE_URL = import.meta.env.VITE_API_BASE_URL || 'http://localhost:8000';
+
 const YearlyDataView = ({ locationData }) => {
   const [yearlyData, setYearlyData] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -30,7 +32,7 @@ const YearlyDataView = ({ locationData }) => {
         for (let day = 1; day <= daysInMonth; day++) {
           try {
             const response = await fetch(
-              `http://localhost:8000/api/predict/${month}/${day}?location=${locationData.nearest.name}&window_days=3`
+              `${API_BASE_URL}/api/predict/${month}/${day}?location=${locationData.nearest.name}&window_days=3`
             );
 
             if (response.ok) {

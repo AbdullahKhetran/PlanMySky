@@ -3,7 +3,9 @@
  * Handles OAuth flow and event creation
  */
 
-const API_BASE = 'http://localhost:8000/api/calendar';
+const API_BASE_URL = import.meta.env.VITE_API_BASE_URL || 'http://localhost:8000';
+
+const API_BASE = `${API_BASE_URL}/api/calendar`;
 
 /**
  * Generate a unique user ID (in production, use actual user authentication)

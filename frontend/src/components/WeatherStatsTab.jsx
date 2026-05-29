@@ -5,6 +5,8 @@ import {
 } from 'recharts';
 import YearlyDataView from './YearlyDataView';
 
+const API_BASE_URL = import.meta.env.VITE_API_BASE_URL || 'http://localhost:8000';
+
 const WeatherStatsTab = ({ weatherData, locationData }) => {
   const [monthlyStats, setMonthlyStats] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -25,7 +27,7 @@ const WeatherStatsTab = ({ weatherData, locationData }) => {
       // Fetch stats for all 12 months
       for (let month = 1; month <= 12; month++) {
         const response = await fetch(
-          `http://localhost:8000/api/monthly/${month}?location=${locationData.nearest.name}`
+          `${API_BASE_URL}/api/monthly/${month}?location=${locationData.nearest.name}`
         );
         if (response.ok) {
           const data = await response.json();
